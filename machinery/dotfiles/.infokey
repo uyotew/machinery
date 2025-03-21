@@ -1,0 +1,8 @@
+#info 
+\r select-reference-this-line
+l  next-node
+h  prev-node
+u  up-node
+d  dir-node
+^o history-node 
+

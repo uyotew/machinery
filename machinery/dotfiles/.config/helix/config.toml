@@ -1,0 +1,12 @@
+theme = "clean"
+
+[editor]
+mouse = false
+gutters = []
+
+[editor.statusline]
+right = ["file-type", "diagnostics", "selections", "position", "position-percentage"]
+
+[editor.lsp]
+enable = false
+

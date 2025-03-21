@@ -1,0 +1,59 @@
+attribute = "beige"
+type = "blue"
+constructor = "pink"
+constant = "brown"
+string = "dgreen"
+comment = "dbeige"
+variable = "beige"
+label = "brown"
+punctuation = "beige"
+keyword = "green"
+operator = { fg = "dblue", modifiers = ["bold"]}
+function = "pink"
+tag = "blue"
+namespace = "brown"
+special = "beige"
+markup = "beige"
+diff = "beige"
+
+
+"ui.background" = "black"
+"ui.cursor" = { bg = "purple" }
+"ui.cursor.primary" = { bg = "lpurple" }
+"ui.selection" = { bg = "dpurple" }
+"ui.text" = "beige"
+"ui.popup" = {bg = "dpurple", fg = "pink"}
+"ui.popup.info" = {bg = "black", fg = "pink"}
+"ui.help" = "pink"
+"ui.linenr" = "pink"
+"ui.linenr.selected" = { fg = "lpurple" , modifiers = ["bold"] }
+"ui.statusline" = { fg = "pink" , bg = "dpurple" , modifiers = ["bold"]}
+"ui.menu" = { fg = "pink", bg = "dpurple"}
+"ui.menu.selected" = { fg = "purple", bg = "pink" }
+
+diagnostic = "red"
+hint  = "red"
+info = "red"
+error = "red"
+warning = "red"
+
+
+[palette]
+black = "#111111"
+beige = "#d0b085"
+dbeige = "#907050"
+
+green = "#95c063"
+dgreen = "#438643"
+blue = "#9090d0"
+dblue = "#6060a0"
+brown = "#b06040"
+
+
+lpurple = "#903060"
+purple = "#653050"
+dpurple = "#502030"
+pink = "#ff0070"
+red = "#aa2020"
+
+
