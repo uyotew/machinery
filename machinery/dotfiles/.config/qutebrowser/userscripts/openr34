@@ -1,0 +1,5 @@
+#!/bin/sh
+link=$( cat $QUTE_HTML | grep "Original image" -B 1 )
+url=$( echo $link | cut -d'"' -f2 )
+
+echo "open $url " > $QUTE_FIFO

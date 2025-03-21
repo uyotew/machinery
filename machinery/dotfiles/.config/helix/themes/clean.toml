@@ -1,0 +1,28 @@
+string = "green"
+comment = "dbeige"
+keyword = "pink"
+
+"ui.background" = "black"
+"ui.cursor" = {bg = "dgreen"}
+"ui.cursor.primary" = { fg = "black" ,bg = "green" }
+"ui.selection" = { bg = "dgreen" }
+"ui.text" = "beige"
+"ui.popup" = {bg = "grey", fg = "pink"}
+"ui.popup.info" = {bg = "grey", fg = "pink"}
+"ui.help" = {bg = "grey", fg = "pink"}
+"ui.statusline" = { fg = "pink" , bg = "grey" }
+"ui.menu" = { fg = "pink", bg = "grey"}
+"ui.menu.selected" = { fg = "black", bg = "green" }
+
+
+
+[palette]
+black = "#111111"
+grey = "#222222"
+beige = "#d0b085"
+dbeige = "#907050"
+green = "#859933"
+dgreen = "#354913"
+pink = "#ff0070"
+
+
