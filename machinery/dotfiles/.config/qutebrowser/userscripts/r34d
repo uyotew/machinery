@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# from the first page
+link=$( cat $QUTE_HTML | grep "Original image" -B 1 )
+url=$( echo $link | cut -d'"' -f2 )
+
+# from original image page
+if [ -z $url ]; then
+  url=$QUTE_URL
+fi
+
+fmt=$( echo $url | grep -e "\.[a-z]*?" -o | cut -d'?' -f1 )
+id=$( echo $url | cut -d'?' -f2 )
+
+dest="$QUTE_DOWNLOAD_DIR/$id$fmt"
+
+echo "download -d $dest $url" > $QUTE_FIFO
+

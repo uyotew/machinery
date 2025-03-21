@@ -1,0 +1,4 @@
+#!/bin/sh
+link=$( cat $QUTE_HTML | grep "tag-type-artist" -A 2 | grep "page=post")
+url=$( echo $link | cut -d'"' -f2 | sed "s/amp;//g")
+echo "open rule34.xxx/$url " > $QUTE_FIFO
