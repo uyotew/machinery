@@ -1,12 +1,13 @@
-(define-module (machinery reconfigure)
+(define-module (machinery system)
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
-  #:export (get-host-system get-keypit main))
+  #:use-module (guix utils)
+  #:export (resolve-system))
 
-;; use this to reconfigure the system based on the hostname
-;; sudo guix system reconfigure -e "((@ (machinery reconfigure) main))"
+;; use this to get the system based on the hostname
+;; sudo guix system reconfigure -e "((@ (machinery system) resolve-system))"
 
-;; host-system should be a function taking the keypit function as an argument  
+;; should return a function taking the keypit function as an argument
 (define (get-host-system)
   ;; HOSTNAME is not exported by default in guix, but can be used to override the /etc/hostname file
   ;; set for example HOSTNAME=laptop before reconfiguring a new laptop
@@ -17,8 +18,7 @@
 
 (define (get-keypit)
   (let ((password (read-line (open-input-pipe "read -s -p \"keypit password: \"; echo $REPLY")))
-        ;; assumes keypit.db is stored in the same directory as this file
-        (filepath (string-append (dirname (current-filename)) "/keypit.db")))
+        (filepath (string-append (current-source-directory) "/keypit.db")))
     (lambda (entry-name field-name)
       (let* ((port (open-pipe* OPEN_READ "keypit" "--stdout" 
                              "-d" filepath "-p" password 
@@ -28,4 +28,4 @@
             result 
             (error "keypit error"))))))
 
-(define (main) ((get-host-system) (get-keypit)))
+(define (resolve-system) ((get-host-system) (get-keypit)))
