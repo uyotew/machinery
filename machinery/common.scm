@@ -124,9 +124,6 @@
      (modify-services %base-services
       (guix-service-type config => (guix-configuration
        (inherit config)
-       ;; probably don't want this, i think it messes up guix repl 
-       ;; (only after you have ran guix pull and not system reconfigure afterwards)
-       (guix (guix-for-channels %channels))
        (channels %channels)
        (substitute-urls (cons "https://substitutes.nonguix.org" %default-substitute-urls))
        (authorized-keys (cons (plain-file "nonguix.pub" nonguix-pubkey) %default-authorized-guix-keys)))))))
