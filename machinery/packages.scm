@@ -137,9 +137,9 @@
     (method git-fetch)
     (uri (git-reference 
           (url "https://github.com/uyotew/keypit.git")
-          (commit "3cc08cbf5f0624e03d28befdfb70e54ac4f582cd")))
+          (commit "13bc8a6f2feeed4586c6198381a7a4bde91aba41")))
     (sha256
-     (base32 "07jcs9vkllax06wmdxw67n6ljfjkg0l7yx9k6zwf4gzpsz17r5r2"))))
+     (base32 "1645qayz6d1fxh4y1zlvn5fzddpp2zs6wlv5jp6hzzzg1m394994"))))
   (build-system zig-build-system)
   (arguments (list 
              #:tests? #f
