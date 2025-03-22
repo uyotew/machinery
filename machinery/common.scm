@@ -143,7 +143,6 @@
    (service home-pipewire-service-type)
    (service home-dotfiles-service-type
     (home-dotfiles-configuration
-     ;; isn't found unless loadpath is absolute...? (-L /home/uyotew/machinery)
      (directories '("dotfiles"))))
    (service home-files-service-type
     `((".local/share/keypit.db" ,(local-file "keypit.db"))))
