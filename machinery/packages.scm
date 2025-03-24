@@ -106,6 +106,14 @@
   (home-page #f)
   (license #f)))
   
+;;; this doesnt work
+;;;
+;;; git clone https://github.com/uyotew/timer
+;;; cd timer
+;;; guix shell --pure zig@0.14 coreutils
+;;; C_INCLUDE_PATH=/gnu/store/a6ll8768m4kby1aam8jn65ympwap4pa8-pulseaudio-16.1/include/ LIBRARY_PATH=/gnu/store/a6ll8768m4kby1aam8jn65ympwap4pa8-pulseaudio-16.1/lib/ zig build
+;;; compiles fine, but with guix build, it errors, unable to find pulse-simple.so . searched paths = .none
+;;; giving up for now :/
 (define-public timer
  (package
   (name "timer")

@@ -11,3 +11,4 @@ cd keypit
 zig build
 
 zig will display errors, but the binary is in zig-out/bin/keypit, and works fine
+just git clone https://github.com/uyotew/machinery to get keypit.db
