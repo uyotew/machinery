@@ -7,4 +7,4 @@
 
 (define (desktop-system keypit)
   (operating-system
-    (inherit (base-system "desktop" "XXXX-XXXX" "10.4.4.4/24" desktop-home keypit))))
+    (inherit (base-system "desktop" "5D9C-BC48" "10.4.4.4/24" desktop-home keypit))))
