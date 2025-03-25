@@ -1,7 +1,8 @@
 (define-module (machinery system)
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
-  #:use-module (guix utils)
+  #:use-module (guix)
+  #:use-module (machinery packages)
   #:export (resolve-system))
 
 ;; use this to get the system based on the hostname
@@ -18,9 +19,14 @@
 
 (define (get-keypit)
   (let ((password (read-line (open-input-pipe "read -s -p \"keypit password: \"; echo $REPLY")))
+        (keypit (string-append
+                  (with-store store (let ((drv (package-derivation store keypit)))
+                                      (build-derivations store (list drv))
+                                      (derivation->output-path drv)))
+                 "/bin/keypit"))
         (filepath (string-append (current-source-directory) "/keypit.db")))
     (lambda (entry-name field-name)
-      (let* ((port (open-pipe* OPEN_READ "keypit" "--stdout" 
+      (let* ((port (open-pipe* OPEN_READ keypit "--stdout"
                              "-d" filepath "-p" password 
                              "get" entry-name field-name))
             (result (read-line port)))
