@@ -119,7 +119,6 @@
           (public-key "0DdOrmHLje5h2ysDHxQ9ljtW4RmIZhczN9DWV9Uz5wo=")
           (allowed-ips '("10.4.4.0/24")))))))
      ;; need to manually connect to wifi with nmcli
-     ;; and maybe add 10.4.4.1 as a second dns server for wireguard
      (service network-manager-service-type)
      (modify-services %base-services
       (guix-service-type config => (guix-configuration
