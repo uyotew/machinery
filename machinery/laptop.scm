@@ -29,5 +29,5 @@ fi
       (inherit base)
       (packages (cons*
                   intel-media-driver/nonfree
-                  %operating-system-packages base)))))
+                  (operating-system-packages base))))))
 
