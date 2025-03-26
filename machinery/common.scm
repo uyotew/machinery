@@ -148,14 +148,11 @@
    (simple-service 'bash-ext home-bash-service-type
   		(home-bash-extension
   		 (bash-profile
-  		  (list 
-  		   (plain-file "envs+sway" "\
+        (list
+         (plain-file "envs" "\
 export HISTCONTROL='erasedups'
 export LESS='-R --file-size --use-color'
 export EDITOR='helix'
-if [ -z \"$WAYLAND_DISPLAY\" ] && [ -n \"$XDG_VTNR\" ] && [ \"$XDG_VTNR\" -eq 1 ] ; then
-    exec sway
-fi  		                
 ")))
 		   (aliases
 		    '(("ll" . "ls -lhp ")
@@ -173,4 +170,3 @@ fi
         (plain-file "show-reminder"
                      "cat ~/reminder")))))))))
  
-
