@@ -145,9 +145,9 @@
     (method git-fetch)
     (uri (git-reference 
           (url "https://github.com/uyotew/keypit.git")
-          (commit "13bc8a6f2feeed4586c6198381a7a4bde91aba41")))
+          (commit "2e551c7530275d4fa2194b2f1d509242a9aa6c6d")))
     (sha256
-     (base32 "1645qayz6d1fxh4y1zlvn5fzddpp2zs6wlv5jp6hzzzg1m394994"))))
+     (base32 "1fxwjm4kbvk0lvv00ia215aa8awazh81y98hgqmydcp2syxjj2q2"))))
   (build-system zig-build-system)
   (arguments (list 
              #:tests? #f
@@ -156,4 +156,4 @@
   (description "password/secret manager")
   (home-page #f)
   (license #f)))
-  
+ 
