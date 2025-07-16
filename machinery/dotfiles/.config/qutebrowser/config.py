@@ -116,8 +116,8 @@ config.bind('J', 'scroll-px 0 150')
 
 config.bind(';v', 'hint links spawn -d mpv {hint-url}')
 config.bind(',v', 'spawn -d mpv {url}')
-config.bind(';V', 'hint links spawn -d mpv {hint-url} --config=no')
-config.bind(',V', 'spawn -d mpv {url} --config=no')
+config.bind(';V', 'hint links spawn -d mpv --ytdl-raw-options-add=cookies-from-browser=chromium:~/.local/share/qutebrowser/ {hint-url}')
+config.bind(',V', 'spawn -d mpv --ytdl-raw-options-add=cookies-from-browser=chromium:~/.local/share/qutebrowser/ {url}')
 
 config.bind('*', 'mode-enter set_mark')
 
