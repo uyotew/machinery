@@ -130,10 +130,10 @@
     ;; Allow resolution of '.local' host names with mDNS.
     (name-service-switch %mdns-host-lookup-nss)))
 
-(define base-home
+(define* (base-home #:optional (prompt-color 107) (dollar-color 198))
  (home-environment
   (packages (list 
-             zig-0.14 git openssh wireplumber bluez
+             zig-0.14 git openssh wireplumber bluez light
              font-hack font-google-noto-emoji font-google-noto-sans-cjk
              sway statusbar wl-clipboard qutebrowser foot mpv mpvl yt-dlp feh
              helix keypit))
@@ -164,7 +164,8 @@ export EDITOR='helix'
        (bashrc (list 
         (plain-file "prompt" (string-append
          "PS1='"
-		     "\\[\\e[38;5;222m\\][\\u@\\h \\W]\\[\\e[38;5;198m\\]"
+		     "\\[\\e[38;5;" (number->string prompt-color) "m\\]"
+		     "[\\u@\\h \\W]\\[\\e[38;5;" (number->string dollar-color) "m\\]"
 		     "${GUIX_ENVIRONMENT:+[env]}\\$\\[\\e[0m\\] " ; display [env] when in a guix shell
 		     "\\[\\e]2;\\w - foot\\a\\]'")) ; append path to terminal window name 
         (plain-file "show-reminder"

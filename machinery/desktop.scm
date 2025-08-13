@@ -14,22 +14,23 @@
   #:export (desktop-home desktop-system))
 
 (define desktop-home
-  (home-environment
-    (inherit base-home)
-    ; (packages (cons* steam-nvidia blender (replace-mesa sway)
-    ;                  (filter (lambda (p) (not (equal? (package-name p) "sway")))
-    ;                          (home-environment-packages base-home))))
-    (services (cons*
-     (simple-service 'exec-sway home-bash-service-type
-      (home-bash-extension
-       (bash-profile
-        (list
-         (plain-file "exec-sway" "\
+  (let ((base (base-home 211)))
+    (home-environment
+      (inherit base)
+      ; (packages (cons* steam-nvidia blender (replace-mesa sway)
+      ;                  (filter (lambda (p) (not (equal? (package-name p) "sway")))
+      ;                          (home-environment-packages base))))
+      (services (cons*
+       (simple-service 'exec-sway home-bash-service-type
+        (home-bash-extension
+         (bash-profile
+          (list
+           (plain-file "exec-sway" "\
 if [ -z \"$WAYLAND_DISPLAY\" ] && [ -n \"$XDG_VTNR\" ] && [ \"$XDG_VTNR\" -eq 1 ] ; then
     exec sway # --unsupported-gpu
 fi
 ")))))
-     (home-environment-user-services base-home)))))
+       (home-environment-user-services base))))))
 
 (define (desktop-system keypit)
   (let ((base (base-system "desktop" "5D9C-BC48" "10.4.4.4/24" desktop-home keypit)))
