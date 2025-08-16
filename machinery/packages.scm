@@ -110,9 +110,9 @@
 ;;;
 ;;; git clone https://github.com/uyotew/timer
 ;;; cd timer
-;;; guix shell --pure zig@0.14 coreutils
-;;; C_INCLUDE_PATH=/gnu/store/a6ll8768m4kby1aam8jn65ympwap4pa8-pulseaudio-16.1/include/ LIBRARY_PATH=/gnu/store/a6ll8768m4kby1aam8jn65ympwap4pa8-pulseaudio-16.1/lib/ zig build
-;;; compiles fine, but with guix build, it errors, unable to find pulse-simple.so . searched paths = .none
+;;; guix shell --container zig coreutils pulseaudio
+;;; compiles fine, but with guix build, it errors:
+;;; unable to find 'pulse-simple' using strategy 'paths_first'. searched paths: none
 ;;; giving up for now :/
 (define-public timer
  (package
@@ -123,9 +123,9 @@
     (method git-fetch)
     (uri (git-reference 
           (url "https://github.com/uyotew/timer")
-          (commit "29df6fc5c963d50744b262a7d3261df0e3eb33f7")))
+          (commit "357e1647df056a7bf87a370c3337614ab043f8b4")))
     (sha256
-     (base32 "1schmqpr0v3h22jb1cakyf7b0f9gsgly3vnx1ccmrd567g2mh0w9"))))
+     (base32 "1fmf4xmsjbvq2067hhz4a1gr6ivzysn2fx9z5b03ak4ph3y5abkm"))))
   (build-system zig-build-system)
   (arguments (list 
               #:tests? #f
