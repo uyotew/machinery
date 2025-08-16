@@ -106,14 +106,10 @@
   (home-page #f)
   (license #f)))
   
-;;; this doesnt work
-;;;
-;;; git clone https://github.com/uyotew/timer
-;;; cd timer
-;;; guix shell --container zig coreutils pulseaudio
-;;; compiles fine, but with guix build, it errors:
-;;; unable to find 'pulse-simple' using strategy 'paths_first'. searched paths: none
-;;; giving up for now :/
+;;; has to have --search-prefix, since the build sysem adds -Dtarget=x86_64-linux-gnu
+;;; which sets up the compiler for cross-compilation, which means it won't look for libraries
+;;; https://github.com/ziglang/zig/issues/17384
+;;; other guix zig packages doesn't seem to need this... don't know why
 (define-public timer
  (package
   (name "timer")
@@ -128,6 +124,9 @@
      (base32 "1fmf4xmsjbvq2067hhz4a1gr6ivzysn2fx9z5b03ak4ph3y5abkm"))))
   (build-system zig-build-system)
   (arguments (list 
+              #:zig-build-flags
+              #~(list "--search-prefix" #$pulseaudio)
+              #:install-source? #f
               #:tests? #f
               #:zig zig-0.14))
   (inputs (list pulseaudio))

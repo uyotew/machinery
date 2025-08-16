@@ -136,7 +136,7 @@
              zig-0.14 git openssh wireplumber bluez light
              font-hack font-google-noto-emoji font-google-noto-sans-cjk
              sway statusbar wl-clipboard qutebrowser foot mpv mpvl yt-dlp feh
-             helix keypit))
+             helix keypit timer))
   (services (list 
    (service home-dbus-service-type)
    (service home-pipewire-service-type)
