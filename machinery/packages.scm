@@ -43,7 +43,7 @@
                        (if preview (caddr (command-line)) (cadr (command-line)))))
                    0))
            (url (begin
-             (when (< (length files) index) (error "index too high"))
+             (when (<= (length files) index) (error "index too high"))
              (with-input-from-file (string-append dir (list-ref files index))
                (lambda () (string-drop (read-line) 2))))))
      (display (string-append url "\n"))
