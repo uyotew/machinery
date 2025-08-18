@@ -94,9 +94,9 @@
     (method git-fetch)
     (uri (git-reference 
           (url "https://github.com/uyotew/statusbar")
-          (commit "aa69d2d5ade2ca4cc9d102b466466f4f2f9e2317")))
+          (commit "26b8952d679ff6523cf9f0a268c0a2bfbb639698")))
     (sha256
-     (base32 "0bs9xyyfqva1z9xval3dhg9cp3srfpfaladzdcj4hrkf0l4acqrj"))))
+     (base32 "1ac1isn42aycz1qimvcl9ilraqiv9fw5s6x4l49xdl1qak3d1ry9"))))
   (build-system zig-build-system)
   (arguments (list 
              #:tests? #f
