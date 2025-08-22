@@ -8,6 +8,7 @@
   #:use-module (gnu home services shepherd)
   #:use-module (gnu packages linux)
   #:use-module (gnu packages fonts)
+  #:use-module (gnu packages text-editors)
   #:use-module (gnu packages video)
   #:use-module (gnu system)
   #:use-module (gnu services)
