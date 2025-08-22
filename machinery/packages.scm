@@ -52,39 +52,6 @@
          (open-pipe* OPEN_READ "yt-dlp" "--list-thumbnails" url)))
        (system* "swaymsg" "exec" "mpv" url)))))
 
-(define-public helix 
- (package
-  (name "helix")
-  (version "24.07")
-  (source (origin 
-   (method url-fetch)
-   (uri (string-append "https://github.com/helix-editor/helix/releases/download/"
-                        version "/helix-" version "-x86_64-linux.tar.xz"))
-   (file-name (string-append "helix-" version ".tar.xz"))
-   (sha256 (base32 "0p5a23z094233qzfh9ixdkgmgsyivjzpbds1s780w269j1320n62"))))
-  (build-system copy-build-system)
-  (arguments 
-   (list 
-     #:install-plan ''(("hx" "bin/helix") ("runtime" "/share/helix/runtime"))
-     #:phases 
-      #~(modify-phases %standard-phases
-       (add-before 'validate-runpath 'patchelf
-        (lambda _
-         (let ((helix (string-append #$output "/bin/helix")) 
-               (patchelf (string-append #+patchelf "/bin/patchelf"))
-               (loader (string-append #$gcc-toolchain "/bin/ld.so"))
-               (libgcc_s (string-append #$gcc-toolchain "/lib")))
-          (invoke patchelf "--set-interpreter" loader helix)
-          (invoke patchelf "--set-rpath" libgcc_s helix))))
-       (add-after 'patchelf 'wrap-with-runtime
-        (lambda _
-         (wrap-program (string-append #$output "/bin/helix")
-          `("HELIX_RUNTIME" = (,(string-append #$output "/share/helix/runtime")))))))))
-  (synopsis "post-modern text editor")
-  (description "it is text editor, edit text")
-  (home-page "https://helix-editor.com")
-  (license mpl2.0)))
-
 (define-public statusbar
  (package
   (name "statusbar")
