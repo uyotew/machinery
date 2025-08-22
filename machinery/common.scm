@@ -20,6 +20,7 @@
   #:use-module (gnu packages fonts)
   #:use-module (gnu packages xdisorg)
   #:use-module (gnu packages wm)
+  #:use-module (gnu packages text-editors)
   #:use-module (gnu packages image-viewers)
   #:use-module (gnu packages video)
   #:use-module (gnu packages web-browsers)
