@@ -3,7 +3,6 @@
  #:use-module (gnu packages commencement)
  #:use-module (gnu packages pulseaudio)
  #:use-module (gnu packages xdisorg)
- #:use-module (gnu packages video)
  #:use-module (gnu packages zig)
  #:use-module (guix gexp)
  #:use-module (guix packages)
@@ -13,28 +12,7 @@
  #:use-module (guix build-system copy)
  #:use-module (guix build-system zig))
 
-(define-public yt-dlp-new 
- (package 
-  (inherit yt-dlp)
-  (version "2025.08.20")
-  (source
-   (origin
-     (method git-fetch)
-     (uri (git-reference
-           (url "https://github.com/yt-dlp/yt-dlp/")
-           (commit version)))
-     (file-name (git-file-name "yt-dlp" version))
-     (modules '((guix build utils)))
-     (snippet '(substitute* "pyproject.toml"
-                 (("^.*Programming Language :: Python :: 3\\.13.*$") "")))
-     (sha256
-      (base32 "17g32lgax04yrhlvgaphdkkhv0xkxdimw57m6a1d3yhsnrbjiqhm"))))))
 
-(define-public mpv-new
- (package
-  (inherit mpv)
-  (inputs (modify-inputs (package-inputs mpv)
-                         (replace "yt-dlp" yt-dlp-new)))))
 
 (define (script-package name description gexp)
  (package
