@@ -153,12 +153,11 @@
          (plain-file "envs" "\
 export HISTCONTROL='erasedups'
 export LESS='-R --file-size --use-color'
-export EDITOR='helix'
+export EDITOR='hx'
 ")))
 		   (aliases
 		    '(("ll" . "ls -lhp ")
 		      ("la" . "ls -lhpa ")
-		      ("hx" . "helix ")
           ("feh" . "feh -. ")
           ("info" . "info --vi-keys" )
 		      ("duc" . "du -had 1 | sort -hr ")))
