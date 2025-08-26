@@ -1,23 +1,36 @@
-(define-module (machinery system)
+(define-module (machinery resolve)
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
   #:use-module (guix)
   #:use-module (machinery packages)
-  #:export (resolve-system))
+  #:export (host-system
+            host-home))
 
-;; use this to get the system based on the hostname
-;; sudo guix system reconfigure -e "((@ (machinery system) resolve-system))"
+;; use these functions to get the system and home based on the hostname
+;; sudo guix system reconfigure -e "((@ (machinery resolve) host-system))"
+;; and this to reconfigure home
+;; guix home reconfigure -e "((@ (machinery resolve) host-home))"
+
+
+;; HOSTNAME is not exported by default in guix, but can be used to override the /etc/hostname file
+;; set for example HOSTNAME=laptop before reconfiguring a new laptop
+(define (get-hostname)
+  (or (getenv "HOSTNAME")
+      (with-input-from-file "/etc/hostname" read-line)))
+
+(define (host-home)
+  (let* ((hostname (get-hostname))
+         (module (resolve-interface `(machinery ,(string->symbol hostname)))))
+   (module-ref module (string->symbol (string-append hostname "-home")))))
 
 ;; should return a function taking the keypit function as an argument
-(define (get-host-system)
-  ;; HOSTNAME is not exported by default in guix, but can be used to override the /etc/hostname file
-  ;; set for example HOSTNAME=laptop before reconfiguring a new laptop
-  (let* ((hostname (or (getenv "HOSTNAME")
-                       (with-input-from-file "/etc/hostname" read-line)))
+(define (host-system-maker)
+  (let* ((hostname (get-hostname))
          (module (resolve-interface `(machinery ,(string->symbol hostname)))))
    (module-ref module (string->symbol (string-append hostname "-system")))))
 
-(define (get-keypit)
+
+(define (init-keypit-func)
   (let ((password (read-line (open-input-pipe "read -s -p \"keypit password: \"; echo $REPLY")))
         (keypit (string-append
                   (with-store store (let ((drv (package-derivation store keypit)))
@@ -34,4 +47,4 @@
             result 
             (error "keypit error"))))))
 
-(define (resolve-system) ((get-host-system) (get-keypit)))
+(define (host-system) ((host-system-maker) (init-keypit-func)))
