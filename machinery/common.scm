@@ -134,7 +134,7 @@
 (define* (base-home #:optional (prompt-color 107) (dollar-color 198))
  (home-environment
   (packages (list 
-             zig-0.14 git openssh wireplumber bluez light
+             zig-0.15 git openssh wireplumber bluez light
              font-hack font-google-noto-emoji font-google-noto-sans-cjk
              sway statusbar wl-clipboard qutebrowser foot mpv mpvl yt-dlp feh
              helix keypit timer))

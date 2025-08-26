@@ -55,21 +55,22 @@
 (define-public statusbar
  (package
   (name "statusbar")
-  (version "0.1")
+  (version "1.0")
   (source 
    (origin
     (method git-fetch)
     (uri (git-reference 
           (url "https://github.com/uyotew/statusbar")
-          (commit "26b8952d679ff6523cf9f0a268c0a2bfbb639698")))
+          (commit version)))
     (sha256
-     (base32 "1ac1isn42aycz1qimvcl9ilraqiv9fw5s6x4l49xdl1qak3d1ry9"))))
+     (base32 "11j04acwr9z0aj6js1d5v49j1jh16a5d9ah07wlj4raf1pxa7kw4"))))
   (build-system zig-build-system)
   (arguments (list 
-             #:tests? #f
-             #:zig zig-0.14))
-  (synopsis "statusbar for swaybar")
-  (description "statusbar for swaybar")
+              #:tests? #f
+              #:install-source? #f
+              #:zig zig-0.15))
+  (synopsis "Statusbar for swaybar")
+  (description "Statusbar for swaybar")
   (home-page #f)
   (license #f)))
   
@@ -80,22 +81,25 @@
 (define-public timer
  (package
   (name "timer")
-  (version "0.1")
+  (version "1.0")
   (source 
    (origin
     (method git-fetch)
     (uri (git-reference 
           (url "https://github.com/uyotew/timer")
-          (commit "357e1647df056a7bf87a370c3337614ab043f8b4")))
+          (commit version)))
     (sha256
-     (base32 "1fmf4xmsjbvq2067hhz4a1gr6ivzysn2fx9z5b03ak4ph3y5abkm"))))
+     (base32 "0jx05xhm3bhdwl5srlbrpbyfb1wrc7wn348l06xsgc7csbad010f"))))
   (build-system zig-build-system)
   (arguments (list 
+              #:phases
+               #~(modify-phases %standard-phases
+                  (delete 'validate-runpath)) ; validation fails, but the executable works anyways
+              #:tests? #f
+              #:install-source? #f
               #:zig-build-flags
               #~(list "--search-prefix" #$pulseaudio)
-              #:install-source? #f
-              #:tests? #f
-              #:zig zig-0.14))
+              #:zig zig-0.15))
   (inputs (list pulseaudio))
   (synopsis "timer")
   (description "timer")
@@ -105,19 +109,20 @@
 (define-public keypit
  (package
   (name "keypit")
-  (version "0.1")
+  (version "1.0")
   (source 
    (origin
     (method git-fetch)
     (uri (git-reference 
-          (url "https://github.com/uyotew/keypit.git")
-          (commit "2e551c7530275d4fa2194b2f1d509242a9aa6c6d")))
+          (url "https://github.com/uyotew/keypit")
+          (commit version)))
     (sha256
-     (base32 "1fxwjm4kbvk0lvv00ia215aa8awazh81y98hgqmydcp2syxjj2q2"))))
+     (base32 "1nnyr4isndayw4g8yjwgxmxmabrxgqr895iyhq2l35qa08cn1l85"))))
   (build-system zig-build-system)
   (arguments (list 
-             #:tests? #f
-             #:zig zig-0.14))
+              #:tests? #f
+              #:install-source? #f
+              #:zig zig-0.15))
   (synopsis "password/secret manager")
   (description "password/secret manager")
   (home-page #f)
