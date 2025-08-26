@@ -63,7 +63,7 @@
           (url "https://github.com/uyotew/statusbar")
           (commit version)))
     (sha256
-     (base32 "0ldf395b1qi6mch1b0ks5y5022mzah8pdvv8jcp6mqyjr00dvrrr"))))
+     (base32 "0lbl387dmpqipws6xviyg0qf8aj09d4sylf6zjircl4nfqfw8prq"))))
   (build-system zig-build-system)
   (arguments (list 
               #:tests? #f
