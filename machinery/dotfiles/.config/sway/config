@@ -175,9 +175,10 @@ bindsym $mod+x swap container with mark "swap" , mark --toggle "swap"
    bindsym XF86MonBrightnessUp+Shift exec light -A 1
 
 ###bluetooth headset connect and disconnect
+# bluetoothctl seems to buffer output when not writing to the terminal, hence the echo
 set $headset $(bluetoothctl devices | cut -d " " -f 2)
-   bindsym $mod+z exec bluetoothctl connect $headset
-   bindsym $mod+Shift+z exec bluetoothctl disconnect $headset
+   bindsym $mod+z exec statusbar --name bt echo Connecting headset '&' bluetoothctl connect $headset
+   bindsym $mod+Shift+z exec statusbar --name bt echo Disconnecting headset '&' bluetoothctl disconnect $headset
 
 
 ### input method editors ###
