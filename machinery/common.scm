@@ -20,6 +20,7 @@
   #:use-module (gnu packages fonts)
   #:use-module (gnu packages xdisorg)
   #:use-module (gnu packages wm)
+  #:use-module (gnu packages man)
   #:use-module (gnu packages text-editors)
   #:use-module (gnu packages image-viewers)
   #:use-module (gnu packages video)
@@ -137,7 +138,7 @@
              zig-0.15 git openssh wireplumber bluez light
              font-hack font-google-noto-emoji font-google-noto-sans-cjk
              sway statusbar wl-clipboard qutebrowser foot mpv mpvl yt-dlp feh
-             helix keypit timer))
+             helix keypit timer man-pages))
   (services (list 
    (service home-dbus-service-type)
    (service home-pipewire-service-type)
