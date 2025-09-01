@@ -31,7 +31,7 @@
 
 
 (define (init-keypit-func)
-  (let ((password (read-line (open-input-pipe "read -s -p \"keypit password: \"; echo $REPLY")))
+  (let ((password (read-line (open-input-pipe "read -s -p \"Keypit password: \"; echo $REPLY")))
         (keypit (string-append
                   (with-store store (let ((drv (package-derivation store keypit)))
                                       (build-derivations store (list drv))
