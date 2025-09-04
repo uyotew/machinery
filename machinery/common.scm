@@ -59,6 +59,13 @@
 )
 ")
 
+(define sudoers-spec
+  (plain-file "sudoers" "\
+root ALL=(ALL) ALL
+%wheel ALL=(ALL) ALL
+%wheel ALL=(ALL) NOPASSWD: /run/current-system/profile/bin/light
+"))
+
 (define (base-system host-name boot-fs-uuid wg-address home keypit)
   (operating-system
     (kernel linux)
@@ -93,7 +100,8 @@
                                           "audio" "video")))
                  %base-user-accounts))
 
-    (packages %base-packages)
+    (packages (cons light %base-packages))
+    (sudoers-file sudoers-spec)
 
     (services (cons* 
      fontconfig-file-system-service
@@ -135,7 +143,7 @@
 (define* (base-home #:optional (prompt-color 107) (dollar-color 198))
  (home-environment
   (packages (list 
-             zig-0.15 git openssh wireplumber bluez light
+             zig-0.15 git openssh wireplumber bluez
              font-hack font-google-noto-emoji font-google-noto-sans-cjk
              sway statusbar wl-clipboard qutebrowser foot mpv mpvl yt-dlp feh
              helix keypit timer man-pages))
