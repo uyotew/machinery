@@ -53,26 +53,29 @@
        (system* "swaymsg" "exec" "mpv" url)))))
 
 (define-public statusbar
- (package
-  (name "statusbar")
-  (version "1.0")
-  (source 
-   (origin
-    (method git-fetch)
-    (uri (git-reference 
-          (url "https://github.com/uyotew/statusbar")
-          (commit version)))
-    (sha256
-     (base32 "0lbl387dmpqipws6xviyg0qf8aj09d4sylf6zjircl4nfqfw8prq"))))
-  (build-system zig-build-system)
-  (arguments (list 
-              #:tests? #f
-              #:install-source? #f
-              #:zig zig-0.15))
-  (synopsis "Statusbar for swaybar")
-  (description "Statusbar for swaybar")
-  (home-page #f)
-  (license #f)))
+ (let ((commit "1363c880c373a0911d516092eac5273ad88ade35")
+        (revision "0"))
+  (package
+   (name "statusbar")
+   (version (git-version "1.0" revision commit))
+   (source
+    (origin
+     (method git-fetch)
+     (uri (git-reference
+           (url "https://github.com/uyotew/statusbar")
+           (commit commit)))
+     (file-name (git-file-name name version))
+     (sha256
+      (base32 "0gj3mrf9vrrydn2bw5j561jz1zvq5iwn08zzfl1dh8lryqxgpwrj"))))
+   (build-system zig-build-system)
+   (arguments (list
+               #:tests? #f
+               #:install-source? #f
+               #:zig zig-0.15))
+   (synopsis "Statusbar for swaybar")
+   (description "Statusbar for swaybar")
+   (home-page #f)
+   (license #f))))
   
 ;;; has to have --search-prefix, since the build sysem adds -Dtarget=x86_64-linux-gnu
 ;;; which sets up the compiler for cross-compilation, which means it won't look for libraries
@@ -82,16 +85,16 @@
  (package
   (name "timer")
   (version "1.0")
-  (source 
+  (source
    (origin
     (method git-fetch)
-    (uri (git-reference 
+    (uri (git-reference
           (url "https://github.com/uyotew/timer")
           (commit version)))
     (sha256
      (base32 "0jx05xhm3bhdwl5srlbrpbyfb1wrc7wn348l06xsgc7csbad010f"))))
   (build-system zig-build-system)
-  (arguments (list 
+  (arguments (list
               #:phases
                #~(modify-phases %standard-phases
                   (delete 'validate-runpath)) ; validation fails, but the executable works anyways
@@ -107,24 +110,27 @@
   (license #f)))
 
 (define-public keypit
- (package
-  (name "keypit")
-  (version "1.0")
-  (source 
-   (origin
-    (method git-fetch)
-    (uri (git-reference 
-          (url "https://github.com/uyotew/keypit")
-          (commit version)))
-    (sha256
-     (base32 "1nnyr4isndayw4g8yjwgxmxmabrxgqr895iyhq2l35qa08cn1l85"))))
-  (build-system zig-build-system)
-  (arguments (list 
-              #:tests? #f
-              #:install-source? #f
-              #:zig zig-0.15))
-  (synopsis "password/secret manager")
-  (description "password/secret manager")
-  (home-page #f)
-  (license #f)))
+ (let ((commit "f314c437acea0e3eb1ea109b1ef7f01944536063")
+       (revision "0"))
+  (package
+   (name "keypit")
+   (version (git-version "1.0" revision commit))
+   (source
+    (origin
+     (method git-fetch)
+     (uri (git-reference
+           (url "https://github.com/uyotew/keypit")
+           (commit commit)))
+     (file-name (git-file-name name version))
+     (sha256
+      (base32 "1h4fzcbxmdxzqwbj9q9qxcnr5l9hzr4kcb3l13ga3n19i85qqgpc"))))
+   (build-system zig-build-system)
+   (arguments (list
+               #:tests? #f
+               #:install-source? #f
+               #:zig zig-0.15))
+   (synopsis "password/secret manager")
+   (description "password/secret manager")
+   (home-page #f)
+   (license #f))))
  
