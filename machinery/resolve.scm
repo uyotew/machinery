@@ -10,6 +10,9 @@
 ;; sudo guix system reconfigure -e "((@ (machinery resolve) host-system))"
 ;; and this to reconfigure home
 ;; guix home reconfigure -e "((@ (machinery resolve) host-home))"
+;; while qutebrowser has issues:
+;; https://codeberg.org/guix/guix/issues/2998
+;; remember to use --no-grafts
 
 
 ;; HOSTNAME is not exported by default in guix, but can be used to override the /etc/hostname file
