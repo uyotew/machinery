@@ -53,8 +53,8 @@
        (system* "swaymsg" "exec" "mpv" url)))))
 
 (define-public statusbar
- (let ((commit "1363c880c373a0911d516092eac5273ad88ade35")
-        (revision "0"))
+ (let ((commit "6a03952140322ba188209f51f3a4eb0f8af2ea0d")
+        (revision "1"))
   (package
    (name "statusbar")
    (version (git-version "1.0" revision commit))
@@ -66,7 +66,7 @@
            (commit commit)))
      (file-name (git-file-name name version))
      (sha256
-      (base32 "0gj3mrf9vrrydn2bw5j561jz1zvq5iwn08zzfl1dh8lryqxgpwrj"))))
+      (base32 "0wwbrsc1dh95z0mbk8wgs73vzi9hfkbw435qd44mwb77jid40hyn"))))
    (build-system zig-build-system)
    (arguments (list
                #:tests? #f
