@@ -27,6 +27,7 @@
   #:use-module (gnu packages web-browsers)
   #:use-module (gnu packages terminals)
   #:use-module (gnu packages zig)
+  #:use-module (gnu packages pdf)
   #:use-module (guix channels)
   #:use-module (nongnu packages linux)
   #:use-module (nongnu system linux-initrd)
@@ -146,7 +147,7 @@ root ALL=(ALL) ALL
              zig-0.15 git openssh wireplumber bluez
              font-hack font-google-noto-emoji font-google-noto-sans-cjk
              sway statusbar wl-clipboard qutebrowser foot mpv mpvl yt-dlp feh
-             helix keypit timer man-pages))
+             helix keypit timer man-pages zathura zathura-pdf-poppler))
   (services (list 
    (service home-dbus-service-type)
    (service home-pipewire-service-type)
