@@ -22,7 +22,6 @@
   #:use-module (gnu packages wm)
   #:use-module (gnu packages man)
   #:use-module (gnu packages text-editors)
-  #:use-module (gnu packages image-viewers)
   #:use-module (gnu packages video)
   #:use-module (gnu packages web-browsers)
   #:use-module (gnu packages terminals)
@@ -146,7 +145,7 @@ root ALL=(ALL) ALL
   (packages (list 
              zig-0.15 git openssh wireplumber bluez
              font-hack font-google-noto-emoji font-google-noto-sans-cjk
-             sway statusbar wl-clipboard qutebrowser foot mpv mpvl yt-dlp feh
+             sway statusbar wl-clipboard qutebrowser foot mpv yt-dlp
              helix keypit timer man-pages zathura zathura-pdf-poppler))
   (services (list 
    (service home-dbus-service-type)
@@ -168,8 +167,8 @@ export EDITOR='hx'
 		   (aliases
 		    '(("ll" . "ls -lhp ")
 		      ("la" . "ls -lhpa ")
-          ("feh" . "feh -. ")
           ("info" . "info --vi-keys" )
+          ("mpvl" . "mpv --idle=yes --input-commands='script-binding select/select-watch-later'")
 		      ("duc" . "du -had 1 | sort -hr ")))
        (bashrc (list 
         (plain-file "prompt" (string-append

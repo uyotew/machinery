@@ -12,46 +12,6 @@
  #:use-module (guix build-system copy)
  #:use-module (guix build-system zig))
 
-
-
-(define (script-package name description gexp)
- (package
-  (name name)
-  (version "0.0")
-  (source (program-file name gexp))
-  (build-system copy-build-system)
-  (arguments `(#:install-plan '((,name "bin/"))))
-  (synopsis description)
-  (description description)
-  (home-page #f)
-  (license #f)))
-
-(define-public mpvl 
- (script-package "mpvl" "load previously played mpv media"
-  #~(let* ((scandir (@ (ice-9 ftw) scandir))
-           (read-line (@ (ice-9 rdelim) read-line))
-           (read-string (@ (ice-9 rdelim) read-string))
-           (open-pipe* (@ (ice-9 popen) open-pipe*))
-           (dir (string-append (getenv "HOME") "/.local/state/mpv/watch_later/"))
-           (files (scandir dir
-             (lambda (name) (not (or (equal? name ".") (equal? name ".."))))
-             (lambda (a b) (>
-               (stat:mtime (stat (string-append dir a)))
-               (stat:mtime (stat (string-append dir b)))))))
-           (preview (false-if-exception (equal? (cadr (command-line)) "-p")))
-           (index (or (false-if-exception (string->number
-                       (if preview (caddr (command-line)) (cadr (command-line)))))
-                   0))
-           (url (begin
-             (when (<= (length files) index) (error "index too high"))
-             (with-input-from-file (string-append dir (list-ref files index))
-               (lambda () (string-drop (read-line) 2))))))
-     (display (string-append url "\n"))
-     (if preview
-       (system* "feh" ((compose car reverse string-tokenize read-string)
-         (open-pipe* OPEN_READ "yt-dlp" "--list-thumbnails" url)))
-       (system* "swaymsg" "exec" "mpv" url)))))
-
 (define-public statusbar
  (let ((commit "6a03952140322ba188209f51f3a4eb0f8af2ea0d")
         (revision "1"))
