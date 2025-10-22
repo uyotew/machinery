@@ -10,3 +10,5 @@ right = ["file-type", "diagnostics", "selections", "position", "position-percent
 [editor.lsp]
 enable = false
 
+[keys.normal]
+D = ":insert-output 'date +%F'"
