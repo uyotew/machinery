@@ -27,7 +27,7 @@
   ;; if ssh is bad, maybe i need to get a hold of foot terminfo somehow..
   ;; like the foot-terminfo package on arch linux
   (packages (list font-hack font-google-noto-emoji font-google-noto-sans-cjk ; fonts for mpv to use
-             helix mpv mpvl yt-dlp))
+             helix mpv yt-dlp))
   (services (list 
    (service home-dbus-service-type)
    (service home-files-service-type
