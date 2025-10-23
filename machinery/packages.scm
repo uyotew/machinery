@@ -70,8 +70,8 @@
   (license #f)))
 
 (define-public keypit
- (let ((commit "f314c437acea0e3eb1ea109b1ef7f01944536063")
-       (revision "0"))
+ (let ((commit "173054b05a24081550f501cab7a244f5f2ca6fd6")
+       (revision "1"))
   (package
    (name "keypit")
    (version (git-version "1.0" revision commit))
@@ -83,7 +83,7 @@
            (commit commit)))
      (file-name (git-file-name name version))
      (sha256
-      (base32 "1h4fzcbxmdxzqwbj9q9qxcnr5l9hzr4kcb3l13ga3n19i85qqgpc"))))
+      (base32 "1fjxhc9sks360hgh5a6dp65xcln6i1m6myvh0w0n8yw74rm84q9a"))))
    (build-system zig-build-system)
    (arguments (list
                #:tests? #f
