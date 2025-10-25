@@ -148,7 +148,7 @@ root ALL=(ALL) ALL
   (packages (list 
              zig-0.15 git openssh wireplumber bluez
              font-hack font-google-noto-emoji font-google-noto-sans-cjk
-             sway statusbar wl-clipboard qutebrowser foot mpv yt-dlp
+             sway swaybg statusbar wl-clipboard qutebrowser foot mpv yt-dlp
              helix keypit timer man-pages zathura zathura-pdf-poppler))
   (services (list 
    (service home-dbus-service-type)

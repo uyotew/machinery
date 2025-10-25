@@ -212,4 +212,6 @@ bar {
     }
 }
 
+exec_always swaybg -c theme-soft-background
+
 include /etc/sway/config.d/*
