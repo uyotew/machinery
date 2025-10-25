@@ -1,15 +1,11 @@
 (define-module (machinery packages)
- #:use-module (gnu packages elf)
- #:use-module (gnu packages commencement)
  #:use-module (gnu packages pulseaudio)
- #:use-module (gnu packages xdisorg)
  #:use-module (gnu packages zig)
  #:use-module (guix gexp)
  #:use-module (guix packages)
- #:use-module (guix licenses)
+ #:use-module ((guix licenses) #:prefix license:)
  #:use-module (guix download)
  #:use-module (guix git-download)
- #:use-module (guix build-system copy)
  #:use-module (guix build-system zig))
 
 (define-public statusbar
@@ -93,4 +89,3 @@
    (description "password/secret manager")
    (home-page #f)
    (license #f))))
- 

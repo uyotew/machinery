@@ -28,9 +28,12 @@
   #:use-module (gnu packages zig)
   #:use-module (gnu packages pdf)
   #:use-module (guix channels)
+  #:use-module (guix derivations)
+  #:use-module (guix store)
   #:use-module (nongnu packages linux)
   #:use-module (nongnu system linux-initrd)
   #:use-module (machinery packages)
+  #:use-module (machinery themes)
   #:export (%channels
             base-system 
             base-home))
@@ -140,7 +143,7 @@ root ALL=(ALL) ALL
     ;; Allow resolution of '.local' host names with mDNS.
     (name-service-switch %mdns-host-lookup-nss)))
 
-(define* (base-home #:optional (prompt-color 107) (dollar-color 198))
+(define* (base-home #:optional (theme %default-theme))
  (home-environment
   (packages (list 
              zig-0.15 git openssh wireplumber bluez
@@ -152,18 +155,19 @@ root ALL=(ALL) ALL
    (service home-pipewire-service-type)
    (service home-dotfiles-service-type
     (home-dotfiles-configuration
-     (directories '("dotfiles"))))
+      (directories (list (let ((drv (substitute-theme theme (local-file "dotfiles" #:recursive? #t))))
+                           (build-derivations (open-connection) (list drv))
+                           (derivation->output-path drv))))))
    (service home-files-service-type
     `((".local/share/keypit.db" ,(local-file "keypit.db"))))
    (simple-service 'bash-ext home-bash-service-type
   		(home-bash-extension
   		 (bash-profile
         (list
-         (plain-file "envs" "\
-export HISTCONTROL='erasedups'
-export LESS='-R --file-size --use-color'
-export EDITOR='hx'
-")))
+         (plain-file "envs" (string-append
+           "export HISTCONTROL='erasedups'\n"
+           "export LESS='-R --file-size --use-color'\n"
+           "export EDITOR='hx'\n"))))
 		   (aliases
 		    '(("ll" . "ls -lhp ")
 		      ("la" . "ls -lhpa ")
@@ -173,10 +177,14 @@ export EDITOR='hx'
        (bashrc (list 
         (plain-file "prompt" (string-append
          "PS1='"
-		     "\\[\\e[38;5;" (number->string prompt-color) "m\\]"
-		     "[\\u@\\h \\W]\\[\\e[38;5;" (number->string dollar-color) "m\\]"
+		     "\\[\\e[" (theme-csi-primary theme) "m\\]"
+		     "[\\u@\\h \\W]\\[\\e[" (theme-csi-secondary theme) "m\\]"
 		     "${GUIX_ENVIRONMENT:+[env]}\\$\\[\\e[0m\\] " ; display [env] when in a guix shell
 		     "\\[\\e]2;\\w - foot\\a\\]'")) ; append path to terminal window name 
+        (plain-file "ls-colors" (string-append
+           "export LS_COLORS='rs=0:ex=1;" (theme-csi-primary theme) ":"
+                      "di=1;" (theme-csi-secondary theme) ":"
+                      "ln=" (theme-csi-tertiary theme) ":'"))
         (plain-file "show-reminder"
                      "cat ~/reminder")))))))))
  

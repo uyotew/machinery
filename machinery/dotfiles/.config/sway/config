@@ -11,16 +11,14 @@ set $browser qutebrowser
 
 ### Input configuration
 input type:keyboard {
-        repeat_delay 200
-        repeat_rate 30
-	xkb_layout "no(nodeadkeys)"
-    # caps->escape (shift+capslock->caps) prtscr->mod4 burger-menu->mod4
-	xkb_options "caps:escape","altwin:prtsc_rwin","altwin:menu_win"
+    repeat_delay 200
+    repeat_rate 30
+    xkb_layout "no(nodeadkeys)"
+    xkb_options "caps:escape","altwin:prtsc_rwin","altwin:menu_win"
 }
 
 ### Key bindings
 # Basics:
-
 
     # open foot in same directory as current window
     bindsym $mod+Return exec ~/.config/sway/new_term.sh
@@ -42,6 +40,7 @@ input type:keyboard {
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
 #
 # Moving around:
 #
@@ -156,44 +155,42 @@ mode "resize" {
     bindsym Escape mode "default"
     bindsym $mod+r mode "default"
 }
-bindsym $mod+r mode "resize"
+
+    bindsym $mod+r mode "resize"
 
 ### swap container
 
-bindsym $mod+x swap container with mark "swap" , mark --toggle "swap" 
+    bindsym $mod+x swap container with mark "swap" , mark --toggle "swap"
 
 ###system function keys
-   bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
-   bindsym XF86AudioRaiseVolume+Shift exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+
-   bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-   bindsym XF86AudioLowerVolume+Shift exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-
-   bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+    bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+    bindsym XF86AudioRaiseVolume+Shift exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+
+    bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+    bindsym XF86AudioLowerVolume+Shift exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-
+    bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
-   bindsym XF86MonBrightnessDown exec 'sudo light -U 5 ; pkill -xf "statusbar --retain 1 light" ; statusbar --retain 1 light'
-   bindsym XF86MonBrightnessDown+Shift exec 'sudo light -U 1 ; pkill -xf "statusbar --retain 1 light" ; statusbar --retain 1 light'
-   bindsym XF86MonBrightnessUp exec 'sudo light -A 5 ; pkill -xf "statusbar --retain 1 light" ; statusbar --retain 1 light'
-   bindsym XF86MonBrightnessUp+Shift exec 'sudo light -A 1 ; pkill -xf "statusbar --retain 1 light" ; statusbar --retain 1 light'
+    bindsym XF86MonBrightnessDown exec 'sudo light -U 5 ; pkill -xf "statusbar --retain 1 light" ; statusbar --retain 1 light'
+    bindsym XF86MonBrightnessDown+Shift exec 'sudo light -U 1 ; pkill -xf "statusbar --retain 1 light" ; statusbar --retain 1 light'
+    bindsym XF86MonBrightnessUp exec 'sudo light -A 5 ; pkill -xf "statusbar --retain 1 light" ; statusbar --retain 1 light'
+    bindsym XF86MonBrightnessUp+Shift exec 'sudo light -A 1 ; pkill -xf "statusbar --retain 1 light" ; statusbar --retain 1 light'
 
 ###bluetooth headset connect and disconnect
 # bluetoothctl seems to buffer output when not writing to the terminal, hence the echo
-set $headset $(bluetoothctl devices | cut -d " " -f 2)
-   bindsym $mod+z exec statusbar --name bt echo Connecting headset '&' bluetoothctl connect $headset
-   bindsym $mod+Shift+z exec statusbar --name bt echo Disconnecting headset '&' bluetoothctl disconnect $headset
+    set $headset $(bluetoothctl devices | cut -d " " -f 2)
+    bindsym $mod+z exec statusbar --name bt echo Connecting headset '&' bluetoothctl connect $headset
+    bindsym $mod+Shift+z exec statusbar --name bt echo Disconnecting headset '&' bluetoothctl disconnect $headset
 
 
 ### input method editors ###
-bindsym $mod+u exec statusbar unicode-ime '2>&1 | grep error'
-bindsym $mod+n exec statusbar japanese-ime '2>&1 | grep error'
+    bindsym $mod+u exec statusbar unicode-ime '2>&1 | grep error'
+    bindsym $mod+n exec statusbar japanese-ime '2>&1 | grep error'
 
 ###visual stuff
-   hide_edge_borders both
+    hide_edge_borders both
 
-client.focused #859933 #859933 #111111 #859933
-client.focused_inactive #113311 #113311 #ff0070 #113311	 
-client.unfocused #222222 #222222 #ff0070 #222222
-
-
-
+    client.focused #theme-primary #theme-primary #theme-background #theme-primary
+    client.focused_inactive #theme-tertiary #theme-tertiary #theme-background #theme-tertiary
+    client.unfocused #theme-soft-background #theme-soft-background #theme-secondary #theme-soft-background
 
 #
 # Status Bar:
@@ -207,11 +204,11 @@ bar {
     
 
     colors {
-        statusline #ff0070
-        background #111111
-	focused_workspace #859933 #859933 #111111
-        inactive_workspace #222222 #222222 #ff0070
-	urgent_workspace #ff0070 #9f3030 #ffffff
+        statusline #theme-secondary
+        background #theme-background
+        focused_workspace #theme-primary #theme-primary #theme-background
+        inactive_workspace #theme-soft-background #theme-soft-background #theme-primary
+        urgent_workspace #theme-soft-background #theme-tertiary #theme-background
     }
 }
 

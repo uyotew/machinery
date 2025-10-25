@@ -14,7 +14,7 @@
   #:export (desktop-home desktop-system))
 
 (define desktop-home
-  (let ((base (base-home 211)))
+  (let ((base (base-home)))
     (home-environment
       (inherit base)
       ; (packages (cons* steam-nvidia blender (replace-mesa sway)
