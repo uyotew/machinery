@@ -185,6 +185,13 @@ root ALL=(ALL) ALL
            "export LS_COLORS='rs=0:ex=1;" (theme-csi-primary theme) ":"
                       "di=1;" (theme-csi-secondary theme) ":"
                       "ln=" (theme-csi-tertiary theme) ":'"))
+        (plain-file "grep-colors" (string-append
+           "export GREP_COLORS='sl=" (theme-csi-soft theme) ":"
+                      "cx=" (theme-csi-soft theme) ":"
+                      "fn=" (theme-csi-secondary theme) ":"
+                      "ln=" (theme-csi-primary theme) ":"
+                      "se=" (theme-csi-tertiary theme) ":"
+                      "mt=" (theme-csi-text theme) ":'"))
         (plain-file "show-reminder"
                      "cat ~/reminder")))))))))
  
