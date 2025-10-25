@@ -1,0 +1,31 @@
+set completion-bg "#theme-soft-background"
+set completion-fg "#theme-text"
+set completion-group-bg "#theme-background"
+set completion-group-fg "#theme-soft"
+set completion-highlight-bg "#theme-primary"
+set comlpetion-highlight-fg "#theme-background"
+
+set default-bg "#theme-background"
+set default-fg "#theme-text"
+
+set inputbar-bg "#theme-background"
+set inputbar-fg "#theme-text"
+
+set statusbar-fg "#theme-text"
+set statusbar-bg "#theme-background"
+
+set highlight-active-color "#theme-primary"
+set highlight-color "#theme-tertiary"
+set highlight-fg "#theme-text"
+
+set index-active-bg "#theme-primary"
+set index-active-fg "#theme-background"
+
+set index-bg "#theme-background"
+set index-fg "#theme-secondary"
+
+theme-dark?set recolor-darkcolor:set recolor-lightcolor; "#theme-background"
+theme-dark?set recolor-lightcolor:set recolor-darkcolor; "#theme-text"
+
+set render-loading-bg "#theme-background"
+set render-loading-fg "#theme-text"
