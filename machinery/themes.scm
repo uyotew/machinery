@@ -14,7 +14,8 @@
             theme-background
             theme-soft-background
             theme-text
-            %default-theme
+            %default-dark-theme
+            %default-light-theme
             theme-csi-primary
             theme-csi-secondary
             theme-csi-tertiary
@@ -43,7 +44,7 @@
   (soft-background theme-soft-background)
   (text            theme-text))
 
-(define %default-theme
+(define %default-dark-theme
   (theme
     (primary "b54877")
     (secondary "aa77ee")
@@ -51,11 +52,14 @@
     (soft "907050")
     (background "121211")
     (soft-background "282822")
-    (text "d5b085")
-    ; (background "bfb7b0")
-    ; (soft-background "aeaa9a")
-    ; (text "151215")
-    ))
+    (text "d5b085") ))
+
+(define %default-light-theme
+  (theme
+    (inherit %default-dark-theme)
+    (background "efe7e0")
+    (soft-background "cecaba")
+    (text "151215") ))
 
 ;; get csi code for theme
 (define (theme-csi-primary theme) (hex-string->csi-fg (theme-primary theme)))
