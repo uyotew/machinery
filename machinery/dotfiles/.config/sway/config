@@ -212,6 +212,6 @@ bar {
     }
 }
 
-exec_always swaybg -c theme-soft-background
+exec_always pkill swaybg; swaybg -c theme-soft-background
 
 include /etc/sway/config.d/*

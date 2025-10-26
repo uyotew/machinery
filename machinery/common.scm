@@ -143,7 +143,7 @@ root ALL=(ALL) ALL
     ;; Allow resolution of '.local' host names with mDNS.
     (name-service-switch %mdns-host-lookup-nss)))
 
-(define* (base-home #:optional (theme %default-light-theme))
+(define* (base-home #:optional (theme %default-dark-theme))
  (home-environment
   (packages (list 
              zig-0.15 git openssh wireplumber bluez
