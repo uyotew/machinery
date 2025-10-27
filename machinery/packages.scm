@@ -1,12 +1,30 @@
 (define-module (machinery packages)
+ #:use-module (guix)
  #:use-module (gnu packages pulseaudio)
  #:use-module (gnu packages zig)
- #:use-module (guix gexp)
- #:use-module (guix packages)
  #:use-module ((guix licenses) #:prefix license:)
- #:use-module (guix download)
  #:use-module (guix git-download)
+ #:use-module (guix build-system font)
  #:use-module (guix build-system zig))
+
+(define-public font-uiua386
+ (package
+  (name "font-uiua386")
+  (version "0.17.3")
+  (source
+   (origin
+     (method url-fetch)
+     (uri (string-append
+            "https://github.com/uiua-lang/uiua/raw/refs/heads/"
+            version
+            "/src/algorithm/Uiua386.ttf"))
+     (sha256
+      (base32 "03d6k8dnz78zn5ynnzl2ndlldc3zcvs0zzyhgpgg6vgckjv6lbbz"))))
+  (build-system font-build-system)
+  (home-page "https://www.uiua.org")
+  (synopsis "Font for uiua")
+  (description "Font for uiua")
+  (license license:expat)))
 
 (define-public statusbar
  (let ((commit "6a03952140322ba188209f51f3a4eb0f8af2ea0d")
