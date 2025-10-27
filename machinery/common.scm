@@ -172,6 +172,9 @@ root ALL=(ALL) ALL
 		      ("la" . "ls -lhpa ")
           ("info" . "info --vi-keys" )
           ("mpvl" . "mpv --idle=yes --input-commands='script-binding select/select-watch-later'")
+          ("host-system-reconfigure" . "guix system reconfigure -e '((@ (machinery resolve) host-system))' ")
+          ("host-home-reconfigure-light" . "guix home reconfigure -e '((@ (machinery resolve) host-home-light))' ")
+          ("host-home-reconfigure-dark" . "guix home reconfigure -e '((@ (machinery resolve) host-home-dark))' ")
 		      ("duc" . "du -had 1 | sort -hr ")))
        (bashrc (list 
         (plain-file "prompt" (string-append
