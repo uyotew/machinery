@@ -13,8 +13,8 @@
   #:use-module (machinery common)
   #:export (desktop-home desktop-system))
 
-(define desktop-home
-  (let ((base (base-home)))
+(define (desktop-home theme)
+  (let ((base (base-home theme)))
     (home-environment
       (inherit base)
       ; (packages (cons* steam-nvidia blender (replace-mesa sway)
@@ -33,7 +33,7 @@ fi
        (home-environment-user-services base))))))
 
 (define (desktop-system keypit)
-  (let ((base (base-system "desktop" "5D9C-BC48" "10.4.4.4/24" desktop-home keypit)))
+  (let ((base (base-system "desktop" "5D9C-BC48" "10.4.4.4/24" keypit)))
     (operating-system
       (inherit base)
       ; (kernel-arguments '("modprobe.blacklist=nouveau" "nvidia_drm.modeset=1"))

@@ -3,13 +3,16 @@
   #:use-module (ice-9 rdelim)
   #:use-module (guix)
   #:use-module (machinery packages)
+  #:use-module (machinery themes)
   #:export (host-system
-            host-home))
+            host-home-light
+            host-home-dark))
 
 ;; use these functions to get the system and home based on the hostname
 ;; sudo guix system reconfigure -e "((@ (machinery resolve) host-system))"
-;; and this to reconfigure home
-;; guix home reconfigure -e "((@ (machinery resolve) host-home))"
+;; and one of these to reconfigure home
+;; guix home reconfigure -e "((@ (machinery resolve) host-home-light))"
+;; guix home reconfigure -e "((@ (machinery resolve) host-home-dark))"
 
 
 ;; HOSTNAME is not exported by default in guix, but can be used to override the /etc/hostname file
@@ -18,12 +21,16 @@
   (or (getenv "HOSTNAME")
       (with-input-from-file "/etc/hostname" read-line)))
 
-(define (host-home)
+;; returns a procedure that takes a theme to create a home profile
+(define (host-home-maker)
   (let* ((hostname (get-hostname))
          (module (resolve-interface `(machinery ,(string->symbol hostname)))))
    (module-ref module (string->symbol (string-append hostname "-home")))))
 
-;; should return a function taking the keypit function as an argument
+(define (host-home-light) ((host-home-maker) %default-light-theme))
+(define (host-home-dark) ((host-home-maker) %default-dark-theme))
+
+;; returns a procedure taking the keypit procedure as an argument
 (define (host-system-maker)
   (let* ((hostname (get-hostname))
          (module (resolve-interface `(machinery ,(string->symbol hostname)))))

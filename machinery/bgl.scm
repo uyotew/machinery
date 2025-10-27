@@ -73,7 +73,7 @@ audio-device=alsa/hdmi:CARD=PCH,DEV=0"))
 ;; not sure if dnsmasq currently is set up to be a stub resolver
 (define (bgl-system keypit) 
  (operating-system
-  (inherit (base-system "bgl" "XXXX-XXXX" "10.4.4.1/24" bgl-home))
+  (inherit (base-system "bgl" "XXXX-XXXX" "10.4.4.1/24"))
   (services (cons*
    (simple-service 'add-hosts 
                     hosts-service-type

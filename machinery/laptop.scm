@@ -8,8 +8,8 @@
   #:use-module (nongnu packages video)
   #:export (laptop-home laptop-system))
 
-(define laptop-home
-  (let ((base (base-home)))
+(define (laptop-home theme)
+  (let ((base (base-home theme)))
     (home-environment
       (inherit base)
       (services (cons*
@@ -25,7 +25,7 @@ fi
        (home-environment-user-services base))))))
 
 (define (laptop-system keypit)
-  (let ((base (base-system "laptop" "EF1A-92A8" "10.4.4.2/24" laptop-home keypit)))
+  (let ((base (base-system "laptop" "EF1A-92A8" "10.4.4.2/24" keypit)))
     (operating-system
       (inherit base)
       (packages (cons*

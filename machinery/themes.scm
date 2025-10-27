@@ -30,8 +30,6 @@
             hex-string->csi-bg
             substitute-theme))
 
-
-
 ;; every field should be a 6 byte hex string "rrggbb"
 (define-record-type* <theme> theme make-theme
   theme?
@@ -89,8 +87,6 @@
 (define (hex-string->csi-bg str)
   (apply format #f "48;2;~a;~a;~a" (hex-string->num-list str)))
 
-;; dir should be a file-like object (can be used in gexp)
-;; returns a derivation
 (define (substitute-theme theme dir)
   (run-with-store (open-connection)
    (mlet %store-monad ((dir-drv (lower-object dir)))

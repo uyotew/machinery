@@ -69,7 +69,7 @@ root ALL=(ALL) ALL
 %wheel ALL=(ALL) NOPASSWD: /run/current-system/profile/bin/light
 "))
 
-(define (base-system host-name boot-fs-uuid wg-address home keypit)
+(define (base-system host-name boot-fs-uuid wg-address keypit)
   (operating-system
     (kernel linux)
     (initrd microcode-initrd)
@@ -116,7 +116,6 @@ root ALL=(ALL) ALL
      (service bluetooth-service-type
              (bluetooth-configuration 
                (auto-enable? #t)))
-     (service guix-home-service-type `(("uyotew" ,home)))
      (service wireguard-service-type 
       (wireguard-configuration
        (addresses `(,wg-address))
