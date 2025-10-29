@@ -168,7 +168,8 @@ root ALL=(ALL) ALL
            "export LESS='-R --file-size --use-color'\n"
            "export EDITOR='hx'\n"))))
 		   (aliases
-		    '(("ll" . "ls -lhp ")
+		    '(("sudo" . "sudo ") ; makes aliases available after sudo
+		      ("ll" . "ls -lhp ")
 		      ("la" . "ls -lhpa ")
           ("info" . "info --vi-keys" )
           ("mpvl" . "mpv --idle=yes --input-commands='script-binding select/select-watch-later'")
