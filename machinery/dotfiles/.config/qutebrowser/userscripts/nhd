@@ -1,0 +1,50 @@
+#!/bin/sh
+
+# works from gallery view and while viewing single image
+
+id=$(echo $QUTE_URL | grep -o "[0-9]*" | head -1 )
+
+pages=$(cat $QUTE_HTML | grep "num-pages\">[0-9]*" -m 1 -o | grep -o "[0-9]*" | head -1 )
+
+if [ -z "$pages" ]; then
+  pages=$(cat $QUTE_HTML | grep "Pages:" -A 20 | grep -o "\"name\".*" | grep -o "[0-9]*" | head -1 )
+fi
+if [ -z "$pages" ]; then
+  echo "message-error \"failed to get number of pages\"" > $QUTE_FIFO
+  exit
+fi
+
+gid=$(cat $QUTE_HTML | grep "/galleries/[0-9]*" -m 1 -o | grep "[0-9]*" -o | head -1 )
+index=1
+fmt="webp"
+temp="$QUTE_DOWNLOAD_DIR/$id/temp"
+pref="0000000"
+gal_url=${QUTE_URL/"//"/&i3.}
+gal_url="${gal_url%g*}galleries"
+
+mkdir "$QUTE_DOWNLOAD_DIR/$id"
+echo "message-info \"downloading $pages pages\"" >> $QUTE_FIFO
+while [ $index -le $pages ]; do
+  wget "$gal_url/$gid/$index.$fmt" -O "$temp"
+  if [ $? -ne 0 ]; then
+    if [ "$fmt" != "jpg" ]; then fmt="jpg"; fi
+    wget "$gal_url/$gid/$index.$fmt" -O "$temp"
+    if [ $? -ne 0 ]; then
+      if [ "$fmt" != "png" ]; then fmt="png"; fi
+      wget "$gal_url/$gid/$index.$fmt" -O "$temp"
+      if [ $? -ne 0 ]; then
+        if [ "$fmt" != "webp" ]; then fmt="webp"; fi
+        wget "$gal_url/$gid/$index.$fmt" -O "$temp"
+        if [ $? -ne 0 ]; then
+          echo "message-error \"wget: error on $index.$fmt\"" >> $QUTE_FIFO
+          exit
+        fi
+      fi
+    fi
+  fi
+  diff=$(( ${#pages} - ${#index} ))
+  mv "$temp" "$QUTE_DOWNLOAD_DIR/$id/${pref:0:$diff}$index.$fmt"
+  index=$(( $index + 1 ))
+done
+
+echo "message-info \"finished downloading $id\"" >> $QUTE_FIFO
