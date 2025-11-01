@@ -172,7 +172,7 @@ root ALL=(ALL) ALL
 		      ("ll" . "ls -lhp ")
 		      ("la" . "ls -lhpa ")
           ("info" . "info --vi-keys" )
-          ("zig-std" . "cd $(zig env | grep -o '\".*std\"')")
+          ("zig-std" . "cd $(zig env | grep -o /.*/std)")
           ("mpvl" . "mpv --idle=yes --input-commands='script-binding select/select-watch-later'")
           ("host-system-reconfigure" . "guix system reconfigure -e '((@ (machinery resolve) host-system))' ")
           ("host-home-reconfigure-light" . "guix home reconfigure -e '((@ (machinery resolve) host-home-light))' ")
