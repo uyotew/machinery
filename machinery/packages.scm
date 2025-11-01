@@ -27,8 +27,8 @@
   (license license:expat)))
 
 (define-public statusbar
- (let ((commit "79fa70ac92a62e13b002ecee680a801f87a23f40")
-        (revision "2"))
+ (let ((commit "9d3b499347072d9ba9356d38ab4ffd7b50dea6d7")
+        (revision "3"))
   (package
    (name "statusbar")
    (version (git-version "1.0" revision commit))
@@ -40,7 +40,7 @@
            (commit commit)))
      (file-name (git-file-name name version))
      (sha256
-      (base32 "1hdrikqhjyhy06lcpa7c5gz284d7j5nidma334bhi55v7ysv8ysd"))))
+      (base32 "0s32i4qlbfr1q108cya76cx1vdaq751lix7awfsx854rwfjjk4jl"))))
    (build-system zig-build-system)
    (arguments (list
                #:tests? #f
