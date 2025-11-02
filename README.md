@@ -1,1 +1,1 @@
-personal guix channel
+# Machinery: personal guix channel and configuration

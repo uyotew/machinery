@@ -87,6 +87,9 @@
 (define (hex-string->csi-bg str)
   (apply format #f "48;2;~a;~a;~a" (hex-string->num-list str)))
 
+(define (hex-string->comma-list str)
+  (apply format #f "~a,~a,~a" (hex-string->num-list str)))
+
 (define (substitute-theme theme dir)
   (run-with-store (open-connection)
    (mlet %store-monad ((dir-drv (lower-object dir)))
@@ -104,5 +107,12 @@
             (("theme-soft") #$(theme-soft theme))
             (("theme-background") #$(theme-background theme))
             (("theme-text") #$(theme-text theme))
+            (("theme-commalist-primary") #$(hex-string->comma-list (theme-primary theme)))
+            (("theme-commalist-secondary") #$(hex-string->comma-list (theme-secondary theme)))
+            (("theme-commalist-tertiary") #$(hex-string->comma-list(theme-tertiary theme)))
+            (("theme-commalist-soft-background") #$(hex-string->comma-list (theme-soft-background theme))) ; make sure this is above "theme-commalist-soft"
+            (("theme-commalist-soft") #$(hex-string->comma-list(theme-soft theme)))
+            (("theme-commalist-background") #$(hex-string->comma-list(theme-background theme)))
+            (("theme-commalist-text") #$(hex-string->comma-list(theme-text theme)))
             (("theme-light\\?(.*):(.*);" _ t f) (if #$(theme-light? theme) t f))
             (("theme-dark\\?(.*):(.*);" _ t f) (if #$(theme-dark? theme) t f)))))))))

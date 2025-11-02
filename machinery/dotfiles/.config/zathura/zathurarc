@@ -3,29 +3,31 @@ set completion-fg "#theme-text"
 set completion-group-bg "#theme-background"
 set completion-group-fg "#theme-soft"
 set completion-highlight-bg "#theme-primary"
-set comlpetion-highlight-fg "#theme-background"
+set completion-highlight-fg "#theme-background"
 
-set default-bg "#theme-background"
+set default-bg "#theme-soft-background"
 set default-fg "#theme-text"
 
-set inputbar-bg "#theme-background"
+set inputbar-bg "#theme-soft-background"
 set inputbar-fg "#theme-text"
 
+set statusbar-bg "#theme-soft-background"
 set statusbar-fg "#theme-text"
-set statusbar-bg "#theme-background"
 
-set highlight-active-color "#theme-primary"
-set highlight-color "#theme-tertiary"
-set highlight-fg "#theme-text"
+set highlight-active-color "rgba(theme-commalist-primary,0.5)"
+set highlight-color "rgba(theme-commalist-tertiary,0.5)"
+set highlight-fg "rgba(theme-commalist-text,0.5)"
 
 set index-active-bg "#theme-primary"
 set index-active-fg "#theme-background"
 
-set index-bg "#theme-background"
+set index-bg "#theme-soft-background"
 set index-fg "#theme-secondary"
 
-theme-dark?set recolor-darkcolor:set recolor-lightcolor; "#theme-background"
-theme-dark?set recolor-lightcolor:set recolor-darkcolor; "#theme-text"
+set recolor-lightcolor "#theme-background"
+set recolor-darkcolor "#theme-text"
+set recolor true
 
 set render-loading-bg "#theme-background"
 set render-loading-fg "#theme-text"
+
