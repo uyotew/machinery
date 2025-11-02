@@ -149,6 +149,8 @@ c.colors.statusbar.url.success.https.fg = '#theme-text'
 c.colors.tooltip.bg = '#theme-soft-background'
 c.colors.tooltip.fg = '#theme-soft'
 
+c.content.user_stylesheets = ['~/.config/qutebrowser/user.css']
+
 
 # Bindings for normal mode
 config.unbind('D')
