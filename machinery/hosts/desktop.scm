@@ -1,4 +1,4 @@
-(define-module (machinery desktop)
+(define-module (machinery hosts desktop)
   #:use-module (guix)
   #:use-module (gnu)
   #:use-module (gnu home)
@@ -10,8 +10,22 @@
   #:use-module (nongnu packages game-client)
   #:use-module (nongnu services nvidia)
   #:use-module (nongnu packages nvidia)
-  #:use-module (machinery common)
-  #:export (desktop-home desktop-system))
+  #:use-module (machinery base)
+  #:use-module (machinery themes)
+  #:export (desktop-home
+            desktop-system
+            desktop-dark-theme
+            desktop-light-theme))
+
+(define desktop-dark-theme
+  (theme
+    (inherit %default-dark-theme)
+    (primary "92b277")))
+
+(define desktop-light-theme
+  (theme
+    (inherit %default-light-theme)
+    (primary "92b277")))
 
 (define (desktop-home theme)
   (let ((base (base-home theme)))

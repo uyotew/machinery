@@ -1,4 +1,4 @@
-(define-module (machinery bgl)
+(define-module (machinery hosts bgl)
   #:use-module (gnu home)
   #:use-module (gnu home services)
   #:use-module (gnu home services shells)
@@ -19,7 +19,7 @@
   #:use-module (gnu services networking)
   #:use-module (guix gexp)
   #:use-module (machinery packages)
-  #:use-module (machinery common)
+  #:use-module (machinery base)
   #:export (bgl-home bgl-system))
 
 (define bgl-home
@@ -31,7 +31,7 @@
   (services (list 
    (service home-dbus-service-type)
    (service home-files-service-type
-    `((".local/share/keypit.db" ,(local-file "keypit.db"))))
+    `((".local/share/keypit.db" ,(local-file "../keypit.db"))))
    (simple-service 'bash-ext home-bash-service-type
   		(home-bash-extension
   		 (bash-profile
@@ -55,16 +55,16 @@ export EDITOR='hx'
                   home-xdg-configuration-files-service-type
                   ;; append to mpv.conf to run mpv over hdmi without any window manager
                   `(("mpv/mpv.conf" ,(mixed-text-file "bgl-mpv.conf"
-                                                 (local-file "dotfiles/.config/mpv/mpv.conf")
+                                                 (local-file "../dotfiles/.config/mpv/mpv.conf")
                                                  "\
 #if aspect-ratio looks strange, uncomment the line under this one
 #no-keepaspect
 drm-connector=HDMI-A-2
 drm-device=/dev/dri/card0
 audio-device=alsa/hdmi:CARD=PCH,DEV=0"))
-                    ("mpv/input.conf" ,(local-file "dotfiles/.config/mpv/input.conf"))
-                    ("helix/config.toml" ,(local-file "dotfiles/.config/helix/config.toml"))
-                    ("helix/themes/clean.toml" ,(local-file "dotfiles/.config/helix/themes/clean.toml"))))))))
+                    ("mpv/input.conf" ,(local-file "../dotfiles/.config/mpv/input.conf"))
+                    ("helix/config.toml" ,(local-file "../dotfiles/.config/helix/config.toml"))
+                    ("helix/themes/clean.toml" ,(local-file "../dotfiles/.config/helix/themes/clean.toml"))))))))
 
 
 ;; need to set up static ip as well 192.168.10.55

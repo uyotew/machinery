@@ -1,12 +1,19 @@
-(define-module (machinery laptop)
+(define-module (machinery hosts laptop)
   #:use-module (guix)
   #:use-module (gnu)
   #:use-module (gnu home)
   #:use-module (gnu home services)
   #:use-module (gnu home services shells)
-  #:use-module (machinery common)
   #:use-module (nongnu packages video)
-  #:export (laptop-home laptop-system))
+  #:use-module (machinery base)
+  #:use-module (machinery themes)
+  #:export (laptop-home
+            laptop-system
+            laptop-dark-theme
+            laptop-light-theme))
+
+(define laptop-dark-theme %default-dark-theme)
+(define laptop-light-theme %default-light-theme)
 
 (define (laptop-home theme)
   (let ((base (base-home theme)))

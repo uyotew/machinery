@@ -1,18 +1,18 @@
-(define-module (machinery resolve)
+(define-module (machinery hosts)
   #:use-module (ice-9 popen)
   #:use-module (ice-9 rdelim)
   #:use-module (guix)
   #:use-module (machinery packages)
   #:use-module (machinery themes)
   #:export (host-system
-            host-home-light
-            host-home-dark))
+            host-home-dark
+            host-home-light))
 
-;; use these functions to get the system and home based on the hostname
-;; sudo guix system reconfigure -e "((@ (machinery resolve) host-system))"
+;; reconfigure the system based on the hostname by running:
+;; sudo guix system reconfigure -e "((@ (machinery hosts) host-system))"
 ;; and one of these to reconfigure home
-;; guix home reconfigure -e "((@ (machinery resolve) host-home-light))"
-;; guix home reconfigure -e "((@ (machinery resolve) host-home-dark))"
+;; guix home reconfigure -e "((@ (machinery hosts) host-home-dark))"
+;; guix home reconfigure -e "((@ (machinery hosts) host-home-light))"
 
 
 ;; HOSTNAME is not exported by default in guix, but can be used to override the /etc/hostname file
@@ -21,23 +21,21 @@
   (or (getenv "HOSTNAME")
       (with-input-from-file "/etc/hostname" read-line)))
 
-;; returns a procedure that takes a theme to create a home profile
-(define (host-home-maker)
-  (let* ((hostname (get-hostname))
-         (module (resolve-interface `(machinery ,(string->symbol hostname)))))
-   (module-ref module (string->symbol (string-append hostname "-home")))))
-
-(define (host-home-light) ((host-home-maker) %default-light-theme))
-(define (host-home-dark) ((host-home-maker) %default-dark-theme))
-
-;; returns a procedure taking the keypit procedure as an argument
-(define (host-system-maker)
-  (let* ((hostname (get-hostname))
-         (module (resolve-interface `(machinery ,(string->symbol hostname)))))
-   (module-ref module (string->symbol (string-append hostname "-system")))))
+(define (resolve-host-var hostname var)
+  (module-ref (resolve-interface `(machinery hosts ,(string->symbol hostname)))
+              (string->symbol (string-append hostname "-" var))))
 
 
-(define (init-keypit-func)
+(define (host-home-dark)
+  (define hostname (get-hostname))
+  ((resolve-host-var hostname "home") (resolve-host-var hostname "dark-theme")))
+
+(define (host-home-light)
+  (define hostname (get-hostname))
+  ((resolve-host-var hostname "home") (resolve-host-var hostname "light-theme")))
+
+
+(define (make-keypit-func)
   (let ((password (getpass "Keypit password: "))
         (keypit (string-append
                   (with-store store (let ((drv (package-derivation store keypit)))
@@ -54,4 +52,5 @@
             result 
             (error "keypit error"))))))
 
-(define (host-system) ((host-system-maker) (init-keypit-func)))
+(define (host-system)
+  ((resolve-host-var (get-hostname) "system") (make-keypit-func)))

@@ -1,4 +1,4 @@
-(define-module (machinery common)
+(define-module (machinery base)
   #:use-module (gnu)
   #:use-module (gnu services desktop)
   #:use-module (gnu services guix)
@@ -142,7 +142,7 @@ root ALL=(ALL) ALL
     ;; Allow resolution of '.local' host names with mDNS.
     (name-service-switch %mdns-host-lookup-nss)))
 
-(define* (base-home #:optional (theme %default-dark-theme))
+(define* (base-home theme)
  (home-environment
   (packages (list 
              zig-0.15 git openssh wireplumber bluez
@@ -171,12 +171,12 @@ root ALL=(ALL) ALL
 		    '(("sudo" . "sudo ") ; makes aliases available after sudo
 		      ("ll" . "ls -lhp ")
 		      ("la" . "ls -lhpa ")
-          ("info" . "info --vi-keys" )
+          ("info" . "info --vi-keys ")
           ("zig-std" . "cd $(zig env | grep -o /.*/std)")
           ("mpvl" . "mpv --idle=yes --input-commands='script-binding select/select-watch-later'")
-          ("host-system-reconfigure" . "guix system reconfigure -e '((@ (machinery resolve) host-system))' ")
-          ("host-home-reconfigure-light" . "guix home reconfigure -e '((@ (machinery resolve) host-home-light))' ")
-          ("host-home-reconfigure-dark" . "guix home reconfigure -e '((@ (machinery resolve) host-home-dark))' ")
+          ("reconfigure-host-system" . "guix system reconfigure -e '((@ (machinery hosts) host-system))' ")
+          ("reconfigure-host-home-light" . "guix home reconfigure -e '((@ (machinery hosts) host-home-light))' ")
+          ("reconfigure-host-home-dark" . "guix home reconfigure -e '((@ (machinery hosts) host-home-dark))' ")
 		      ("duc" . "du -had 1 | sort -hr ")))
        (bashrc (list 
         (plain-file "prompt" (string-append
