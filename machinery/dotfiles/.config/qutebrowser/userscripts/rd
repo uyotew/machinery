@@ -9,7 +9,7 @@ if [ -z $url ]; then
   url=$QUTE_URL
 fi
 
-fmt=$( echo $url | grep -e "\.[a-z]*?" -o | cut -d'?' -f1 )
+fmt=$( echo $url | grep "\.\w*?" -o | cut -d'?' -f1 )
 id=$( echo $url | cut -d'?' -f2 )
 
 dest="$QUTE_DOWNLOAD_DIR/$id$fmt"
