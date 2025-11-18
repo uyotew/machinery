@@ -20,12 +20,16 @@
 (define desktop-dark-theme
   (theme
     (inherit %default-dark-theme)
-    (primary "92b277")))
+    (primary "92b277")
+    (secondary "b26692")
+    (tertiary "328233")))
 
 (define desktop-light-theme
   (theme
     (inherit %default-light-theme)
-    (primary "92b277")))
+    (primary "92b277")
+    (secondary "b26692")
+    (tertiary "328233")))
 
 (define (desktop-home theme)
   (let ((base (base-home theme)))
