@@ -1,1 +1,1 @@
-# Machinery: personal guix channel and configuration
+Moved to https://codeberg.org/uyotew/machinery
